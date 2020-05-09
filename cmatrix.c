@@ -79,6 +79,13 @@ matrix matrix_mult(matrix m, matrix a) {
     return n;
 }
 
+void matrix_apply(matrix m, double (*func)(double)) {
+    int i;
+    for (i = 0; i < m->rows * m->columns; i++) {
+        m->p[i] = func(m->p[i]);
+    }
+}
+
 double get_random(double min, double max) {
     return (double)rand()/RAND_MAX*(max + 1.0) + min;
 }
