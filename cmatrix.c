@@ -103,7 +103,7 @@ matrix transpose(matrix m) {
     matrix t = matrix_constructor(m->columns, m->rows);
     for (i = 0; i < m->columns; i++) {
         for (j = 0; j < m->rows; j++) {
-            t->p[i * m->rows * j] = m->p[i + j * m->columns];
+            t->p[i * m->rows + j] = m->p[i + j * m->columns];
         }
     }
     return t;
