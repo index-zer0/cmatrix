@@ -62,6 +62,19 @@ void matrix_add(matrix m, matrix a) {
     return;
 }
 
+void matrix_sub(matrix m, matrix a) {
+    int i;
+    // more checks
+    if (m->rows != a->rows || m->columns != a->columns) {
+        printf("ERROR: matrices should have the save dimensions\n");
+        exit(1);
+    }
+    for (i = 0; i < m->rows * m->columns; i++) {
+        m->p[i] -= a->p[i];
+    }
+    return;
+}
+
 matrix matrix_mult(matrix m, matrix a) {
     if (m->columns != a->rows) {
         printf("ERROR:number of columns of the first matrix is different than the rows of the second one\n");

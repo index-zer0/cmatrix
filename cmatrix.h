@@ -10,6 +10,7 @@ void matrix_scalar_mult(matrix, double);
 void matrix_scalar_add(matrix, double);
 void matrix_hadamard(matrix, matrix);
 void matrix_add(matrix, matrix);
+void matrix_sub(matrix, matrix);
 matrix matrix_mult(matrix, matrix);
 void matrix_apply(matrix, double (*)(double));
 double get_random(double, double);
