@@ -82,13 +82,21 @@ matrix matrix_mult(matrix m, matrix a) {
     }
     matrix n = matrix_constructor(m->rows, a->columns);
     int i, j, k;
-    for (i = 0; i < n->rows; i++) {
-        for (j = 0; j < n->columns; j++) {
-            for (k = 0; k < m->columns; k++) {
-                n->p[i * n->columns + j] += m->p[i*m->columns + k] * a->p[k*a->columns + j];
+    #if defined(_OPENMP)
+    #pragma omp parallel shared(n, m, a) private(i, j, k) 
+    {
+        #pragma omp for  schedule(static)
+    #endif
+        for (i = 0; i < n->rows; i++) {
+            for (j = 0; j < n->columns; j++) {
+                for (k = 0; k < m->columns; k++) {
+                    n->p[i * n->columns + j] += m->p[i*m->columns + k] * a->p[k*a->columns + j];
+                }
             }
         }
+    #if defined(_OPENMP)
     }
+    #endif
     return n;
 }
 
